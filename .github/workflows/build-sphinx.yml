@@ -5,7 +5,7 @@ env:
   GITHUB_REPOSITORY: broderickpt/broderickpt.github.io
   GITHUB_TOKEN: ${{ secrets.CREATE_DEMO_SECRET }}
 
-on: 
+on:
   push:
     branches: [ main ]
 
