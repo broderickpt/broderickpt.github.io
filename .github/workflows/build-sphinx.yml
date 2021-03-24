@@ -21,10 +21,10 @@ jobs:
     - name: install dependencies
       run: |
         set -x
-	export DEBIAN_FRONTEND=noninteractive
+        export DEBIAN_FRONTEND=noninteractive
         sudo apt-get -qqq update
         sudo apt-get install -y build-essential ca-certificates cmake pkg-config wget
-	sudo apt-get install -y git
+        sudo apt-get install -y git
         sudo apt-get install python3.8
         export CEI_SUDO="sudo"
 
