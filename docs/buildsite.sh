@@ -1,6 +1,8 @@
 #!/bin/bash
 set -x
 
+echo "buildsite shell script launched"
+
 apt-get update
 apt-get -y install git rsync python3-sphinx
 

@@ -5,15 +5,16 @@ env:
   GITHUB_REPOSITORY: broderickpt/broderickpt.github.io
   GITHUB_TOKEN: ${{ secrets.CREATE_DEMO_SECRET }}
 
-on:
+on: 
   push:
     branches: [ main ]
+
 
 jobs:
 
   build_sphinx_job:
     runs-on: ubuntu-latest
-    ##  container: debian:buster-slim
+    container: debian:buster-slim
 
     steps:
     
