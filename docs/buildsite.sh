@@ -1,10 +1,8 @@
 #!/bin/bash
 set -x
 
-echo "buildsite shell script launched"
-
-sudo apt-get update
-sudo apt-get -y install git rsync python3-sphinx
+## sudo apt-get update
+## sudo apt-get -y install git rsync python3-sphinx
 
 pwd ls -lah
 export SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct)
@@ -13,10 +11,7 @@ export SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct)
 # BUILD DOCS #
 ##############
  
-# Python Sphinx, configured with source/conf.py
-# See https://www.sphinx-doc.org/
-## make clean
-## make html
+##  Docs built with cmake
 
 #######################
 # Update GitHub Pages #
@@ -26,7 +21,7 @@ git config --global user.name "${GITHUB_ACTOR}"
 git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
  
 docroot=`mktemp -d`
-rsync -av "docs/sphinx/" "${docroot}/"
+rsync -av "doc-build/build/docs/sphinx/" "${docroot}/"
  
 pushd "${docroot}"
 
@@ -41,7 +36,7 @@ touch .nojekyll
 # Add README
 cat > README.md <<EOF
 # README for the GitHub Pages Branch
-This branch is simply a cache for the website served from https://broderickpt.github.io/create-demo/,
+This branch is simply a cache for the website served from https://broderickpt.github.io/demo/,
 and is  not intended to be viewed on github.com.
 
 For more information on how this site is built using Sphinx, Read the Docs, and GitHub Actions/Pages, see:
