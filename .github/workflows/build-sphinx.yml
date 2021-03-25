@@ -26,7 +26,8 @@ jobs:
           sudo apt install python3-pip
           pip install -U Sphinx 
           pip install sphinx_rtd_theme 
-          pip install breathe 
+          pip install breathe
+          which sphinx-build
           sudo apt-get install -y doxygen
           sudo curl -L -o /usr/local/bin/cmake-easyinstall https://git.io/JvLxY
           sudo chmod a+x /usr/local/bin/cmake-easyinstall
