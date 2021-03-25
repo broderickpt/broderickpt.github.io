@@ -61,5 +61,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -x
-          cd "../docs/buildsite.sh"
+          "../docs/buildsite.sh"
         shell: bash
