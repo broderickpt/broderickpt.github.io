@@ -61,5 +61,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -x
-          "../docs/buildsite.sh"
+          "${{ github.workspace }}/doc-build/docs/buildsite.sh"
         shell: bash
