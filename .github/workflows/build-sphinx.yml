@@ -32,7 +32,7 @@ jobs:
           set -x
           sudo apt-get update
           sudo apt-get install -y git
-          rm -rf * .*
+          rm -rf * .[A-Za-z]*
           git clone --depth 1 "https://token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" .
         shell: bash
 
