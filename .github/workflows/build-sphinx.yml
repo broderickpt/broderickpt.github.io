@@ -3,7 +3,7 @@ name: build-sphinx-to-gh-pages
 env:
   GITHUB_ACTOR: broderickpt
   GITHUB_REPOSITORY: broderickpt/broderickpt.github.io
-  GITHUB_TOKEN: ${{ secrets.CREATE_DEMO_SECRET }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 on:
   push:
@@ -22,20 +22,21 @@ jobs:
           export DEBIAN_FRONTEND=noninteractive
           sudo apt-get -qqq update
           sudo apt-get install -y build-essential ca-certificates cmake pkg-config wget
-          sudo apt-get install -y git
           sudo apt-get install python3.8
           export CEI_SUDO="sudo"
 
       - name: Clone repository
         env:
-          GITHUB_TOKEN: ${{ secrets.CREATE_DEMO_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -x
-          git clone "https://token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" .
+          sudo apt-get update
+          sudo apt-get install -y git
+          git clone --depth 1 "https://token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" .
         shell: bash
 
       - name: Run build script for Sphinx pages
         env:
-          GITHUB_TOKEN: ${{ secrets.CREATE_DEMO_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: "docs/buildsite.sh"
         shell: bash
