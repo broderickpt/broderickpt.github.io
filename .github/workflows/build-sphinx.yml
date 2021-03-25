@@ -23,21 +23,29 @@ jobs:
           sudo apt-get -qqq update
           sudo apt-get install -y build-essential ca-certificates cmake pkg-config wget
           sudo apt-get install python3.8
+          sudo curl -L -o /usr/local/bin/cmake-easyinstall https://git.io/JvLxY
+          sudo chmod a+x /usr/local/bin/cmake-easyinstall
           export CEI_SUDO="sudo"
 
       - name: Clone repository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/checkout@v2
+        with:
+          path: doc-build
+      - name: build the docs
         run: |
           set -x
-          sudo apt-get update
-          sudo apt-get install -y git
-          rm -rf * .[A-Za-z]*
-          git clone --depth 1 "https://token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" .
+          cd doc-build
+          mkdir build && cd build
+          cmake ..
+          make Sphinx
         shell: bash
 
       - name: Run build script for Sphinx pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: "docs/buildsite.sh"
+        run: |
+          set -x
+          cd "../docs/buildsite.sh"
         shell: bash
